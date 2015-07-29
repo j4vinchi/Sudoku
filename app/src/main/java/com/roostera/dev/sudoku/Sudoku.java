@@ -2,14 +2,19 @@ package com.roostera.dev.sudoku;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.preference.PreferenceScreen;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 
-public class Sudoku extends Activity implements OnClickListener
+public class Sudoku extends ActionBarActivity implements OnClickListener
 {
 
     @Override
@@ -44,8 +49,11 @@ public class Sudoku extends Activity implements OnClickListener
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
 
     }
@@ -53,18 +61,14 @@ public class Sudoku extends Activity implements OnClickListener
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
+        switch (item.getItemId())
         {
-            return true;
+            case R.id.action_settings:
+                startActivity(new Intent(this, Prefs.class));
+                return true;
+            //More items go here
         }
-
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
 }
